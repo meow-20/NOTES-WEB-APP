@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Notes !</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <main class="w-full h-screen bg-zinc-950">
+        <div id="writeNote" class="w-full p-10">
+            <h1 class="text-white text-2xl mb-5 bold">Take Notes...</h1>
+            <form action="/create" method="post">
+                <input class="w-full p-2 rounded-md text-white bg-zinc-800 mb-3 focus:text-white" type="text" name="title" placeholder="Title goes here...">
+                <textarea class="w-full p-2 rounded-md text-white bg-zinc-800 mb-2 focus:text-white" name="details" placeholder="Enter details here..."></textarea>
+                <input class="cursor-pointer bg-blue-800 text-white p-3 rounded-md" type="submit" value="Create Note">
+            </form>
+        </div>
+        <div id="cards" class="p-10 flex gap-4 flex-wrap">
+            <% if(files.length > 0){ %>
+                <% files.forEach(function(val){ %>
+                    <div id="card" class="w-72 px-3 py-4 rounded-md bg-zinc-800">
+                        <h1 class="text-white text-3xl"><%= val %></h1>
+                        <div class="w-full flex justify-between mt-3">
+                            <a href=" /file/<%= val %> " class="text-blue-800 inline-block">Read More.</a>
+                            <a href="/edit/<%= val %>" class="text-zinc-600">Edit Title >></a>
+                        </div>
+                        <a href="/delete/<%= val %>" class="text-red-500">Delete Note</a>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <h3 class="text-zinc-600">No Tasks Yet.</h3>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>
